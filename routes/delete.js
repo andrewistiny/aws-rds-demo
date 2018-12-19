@@ -16,8 +16,8 @@ console.log('event', event);
 const student_id = event.body.student_id;
 const student_name = event.body.student_name;
 const grade_level = event.body.grade_level;
-  const UpadateStudentInfo = `UPDATE ${table} SET  student_name = $1, grade_level = $2 WHERE student_id = $3;`;
-  console.log(UpadateStudentInfo, "update");
+  const UpadateStudentInfo = `UPDATE ${table} SET  student_name = $1, grade_level = $2 WHERE id = $3;`;
+  
   pool.connect()
   .then(client => {
     client.release()
