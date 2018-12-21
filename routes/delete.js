@@ -11,17 +11,15 @@ const pool =  new  Pool({
   idleTimeoutMillis: 1000
 });
 
-module.exports.UpdateStudent = (event, context, callback) => {
+module.exports.deleteStudent = (event, context, callback) => {
 console.log('event', event);
 const student_id = event.body.student_id;
-const student_name = event.body.student_name;
-const grade_level = event.body.grade_level;
-  const UpadateStudentInfo = `UPDATE ${table} SET  student_name = $1, grade_level = $2 WHERE id = $3;`;
+  const deleteStudentInfo = `DELETE FROM ${table} WHERE student_id = $1`;
   
   pool.connect()
   .then(client => {
     client.release()
-    return client.query(UpadateStudentInfo, [student_name, grade_level, student_id]);
+    return client.query(deleteStudentInfo, [student_id]);
   })
   .then(res => {
   const response = {
